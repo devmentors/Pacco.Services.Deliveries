@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Pacco.Services.Deliveries.Application\Pacco.Services.Deliveries.Application.csproj" />
+      <ProjectReference Include="..\Pacco.Services.Deliveries.Core\Pacco.Services.Deliveries.Core.csproj" />
+    </ItemGroup>
+
+</Project>

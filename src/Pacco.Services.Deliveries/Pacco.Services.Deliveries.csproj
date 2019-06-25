@@ -15,4 +15,9 @@
     <PackageReference Include="Convey.WebApi.CQRS" Version="0.0.2-preview" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Pacco.Services.Deliveries.Application\Pacco.Services.Deliveries.Application.csproj" />
+    <ProjectReference Include="..\Pacco.Services.Deliveries.Infrastructure\Pacco.Services.Deliveries.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
