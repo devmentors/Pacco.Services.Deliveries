@@ -1,7 +1,7 @@
 using System;
 using Pacco.Services.Deliveries.Core.Exceptions;
 
-namespace Pacco.Services.Vehicles.Core.Entities
+namespace Pacco.Services.Deliveries.Core.Entities
 {
     public class AggregateId : IEquatable<AggregateId>
     {

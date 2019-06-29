@@ -2,7 +2,7 @@ using System;
 
 namespace Pacco.Services.Deliveries.Core.ValueObjects
 {
-    public class DeliveryRegistration
+    public struct DeliveryRegistration : IEquatable<DeliveryRegistration>
     {
         public string Description { get;  }
         public DateTime DateTime { get; }
@@ -23,6 +23,11 @@ namespace Pacco.Services.Deliveries.Core.ValueObjects
             return false;
         }
 
+        public bool Equals(DeliveryRegistration other)
+        {
+            return string.Equals(Description, other.Description) && DateTime.Equals(other.DateTime);
+        }
+        
         public override int GetHashCode()
         {
             unchecked
