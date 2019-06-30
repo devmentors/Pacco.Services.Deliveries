@@ -1,4 +1,5 @@
 using System.Linq;
+using Pacco.Services.Deliveries.Application.DTO;
 using Pacco.Services.Deliveries.Core.Entities;
 using Pacco.Services.Deliveries.Core.ValueObjects;
 
@@ -12,6 +13,7 @@ namespace Pacco.Services.Deliveries.Infrastructure.Mongo.Documents
                 Id = delivery.Id,
                 OrderId = delivery.OrderId,
                 Status = delivery.Status,
+                LastUpdate = delivery.LastUpdate,
                 Registrations = delivery.Registrations.Select(r => new DeliveryRegistrationDocument
                 {
                     Description = r.Description,
@@ -22,5 +24,16 @@ namespace Pacco.Services.Deliveries.Infrastructure.Mongo.Documents
         public static Delivery AsEntity(this DeliveryDocument document)
             => new Delivery(document.Id, document.OrderId, document.Status, 
                 document.Registrations.Select(r => new DeliveryRegistration(r.Description, r.DateTime)));
+
+        public static DeliveryDto AsDto(this DeliveryDocument document)
+            => new DeliveryDto
+            {
+                Id = document.Id,
+                OrderId = document.OrderId,
+                Status = document.Status,
+                LastUpdate = document.LastUpdate,
+                Registrations = document.Registrations.Select(r => (r.Description, r.DateTime))
+            };
+
     }
 }

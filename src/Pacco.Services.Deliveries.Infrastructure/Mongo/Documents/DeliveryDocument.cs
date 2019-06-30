@@ -10,6 +10,7 @@ namespace Pacco.Services.Deliveries.Infrastructure.Mongo.Documents
         public Guid Id { get; set; }
         public Guid OrderId { get; set; }
         public DeliveryStatus Status { get; set; }
+        public DateTime? LastUpdate { get; set; }
         public IEnumerable<DeliveryRegistrationDocument> Registrations { get; set; }
     }
     
