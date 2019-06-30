@@ -13,7 +13,6 @@ namespace Pacco.Services.Deliveries.Infrastructure.Mongo.Documents
                 Id = delivery.Id,
                 OrderId = delivery.OrderId,
                 Status = delivery.Status,
-                LastUpdate = delivery.LastUpdate,
                 Registrations = delivery.Registrations.Select(r => new DeliveryRegistrationDocument
                 {
                     Description = r.Description,
@@ -31,7 +30,6 @@ namespace Pacco.Services.Deliveries.Infrastructure.Mongo.Documents
                 Id = document.Id,
                 OrderId = document.OrderId,
                 Status = document.Status,
-                LastUpdate = document.LastUpdate,
                 Registrations = document.Registrations.Select(r => new DeliveryRegistrationDto
                 {
                     Description = r.Description,
