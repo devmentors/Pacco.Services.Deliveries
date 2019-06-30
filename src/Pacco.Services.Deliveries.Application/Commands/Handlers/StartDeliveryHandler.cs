@@ -19,7 +19,7 @@ namespace Pacco.Services.Deliveries.Application.Commands.Handlers
         public override async Task HandleAsync(StartDelivery command)
         {
             var delivery = Delivery.Create(command.Id, command.OrderId, DeliveryStatus.InProgress);
-            delivery.AddRegistration(new DeliveryRegistration(command.Message, command.DateTime));
+            delivery.AddRegistration(new DeliveryRegistration(command.Description, command.DateTime));
 
             await _repository.AddAsync(delivery);
             await PublishEventsAsync(delivery);

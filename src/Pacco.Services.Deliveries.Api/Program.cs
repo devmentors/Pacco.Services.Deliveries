@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Convey;
-using Convey.CQRS.Commands;
-using Convey.CQRS.Events;
-using Convey.CQRS.Queries;
 using Convey.Logging;
 using Convey.WebApi;
 using Convey.WebApi.CQRS;
@@ -12,6 +8,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Pacco.Services.Deliveries.Application;
 using Pacco.Services.Deliveries.Application.Commands;
+using Pacco.Services.Deliveries.Application.DTO;
+using Pacco.Services.Deliveries.Application.Queries;
 using Pacco.Services.Deliveries.Infrastructure;
 
 namespace Pacco.Services.Deliveries
@@ -27,7 +25,14 @@ namespace Pacco.Services.Deliveries
                 .Build())
             .Configure(app => app
                 .UseInfrastructure()
-               )
+                .UseDispatcherEndpoints(endpoints => endpoints
+                    .Get("", ctx => ctx.Response.WriteAsync("Welcome to Pacco Deliveries Service!"))
+                    .Get<GetDelivery, DeliveryDto>("deliveries/{orderId}")
+                    .Post<StartDelivery>("deliveries/{orderId}/start",
+                        afterDispatch: (cmd, ctx) => ctx.Response.Created($"deliveries/{cmd.OrderId}"))
+                    .Post<FailDelivery>("deliveries/{id}/fail")
+                    .Post<CompleteDelivery>("deliveries/{id}/complete")
+                    .Post<AddDeliveryRegistration>("deliveries/{id}/registrations")))
             .UseLogging()
             .Build()
             .RunAsync();

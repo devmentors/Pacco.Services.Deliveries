@@ -7,13 +7,13 @@ namespace Pacco.Services.Deliveries.Application.Commands
     public class AddDeliveryRegistration : ICommand
     {
         public Guid Id { get; }
-        public string Message { get; }
+        public string Description { get; }
         public DateTime DateTime { get; }
 
-        public AddDeliveryRegistration(Guid id, string message, DateTime dateTime)
+        public AddDeliveryRegistration(Guid id, string description, DateTime dateTime)
         {
             Id = id;
-            Message = message;
+            Description = description;
             DateTime = dateTime;
         }
     }

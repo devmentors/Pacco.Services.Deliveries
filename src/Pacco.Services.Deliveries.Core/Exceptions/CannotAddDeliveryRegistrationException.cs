@@ -1,0 +1,15 @@
+using System;
+using Pacco.Services.Deliveries.Core.Entities;
+
+namespace Pacco.Services.Deliveries.Core.Exceptions
+{
+    public class CannotAddDeliveryRegistrationException : ExceptionBase
+    {
+        public override string Code => "cannot_add_delivery_registration";
+
+        public CannotAddDeliveryRegistrationException(Guid id, DeliveryStatus currentStatus) :
+            base($"Cannot add registration to delivery with id: '{id}' and status {currentStatus}'")
+        {
+        }
+    }
+}

@@ -1,7 +1,5 @@
 using System;
 using Convey;
-using Convey.CQRS.Commands;
-using Convey.CQRS.Events;
 using Convey.CQRS.Queries;
 using Convey.Discovery.Consul;
 using Convey.HTTP;
@@ -15,7 +13,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Pacco.Services.Deliveries.Application;
 using Pacco.Services.Deliveries.Application.Commands;
-using Pacco.Services.Deliveries.Application.Events;
 using Pacco.Services.Deliveries.Application.Services;
 using Pacco.Services.Deliveries.Core.Repositories;
 using Pacco.Services.Deliveries.Infrastructure.Mongo.Documents;

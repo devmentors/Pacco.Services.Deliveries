@@ -8,14 +8,14 @@ namespace Pacco.Services.Deliveries.Application.Commands
     {
         public Guid Id { get; }
         public Guid OrderId { get; }
-        public string Message { get; set; }
+        public string Description { get; set; }
         public DateTime DateTime { get; }
 
-        public StartDelivery(Guid id, Guid orderId, string message, DateTime dateTime)
+        public StartDelivery(Guid id, Guid orderId, string description, DateTime dateTime)
         {
             Id = id;
             OrderId = orderId;
-            Message = message;
+            Description = description;
             DateTime = dateTime;
         }
     }

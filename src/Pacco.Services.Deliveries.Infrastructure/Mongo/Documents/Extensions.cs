@@ -20,7 +20,7 @@ namespace Pacco.Services.Deliveries.Infrastructure.Mongo.Documents
                     DateTime = r.DateTime
                 })
             };
-
+ 
         public static Delivery AsEntity(this DeliveryDocument document)
             => new Delivery(document.Id, document.OrderId, document.Status, 
                 document.Registrations.Select(r => new DeliveryRegistration(r.Description, r.DateTime)));
@@ -32,7 +32,11 @@ namespace Pacco.Services.Deliveries.Infrastructure.Mongo.Documents
                 OrderId = document.OrderId,
                 Status = document.Status,
                 LastUpdate = document.LastUpdate,
-                Registrations = document.Registrations.Select(r => (r.Description, r.DateTime))
+                Registrations = document.Registrations.Select(r => new DeliveryRegistrationDto
+                {
+                    Description = r.Description,
+                    DateTime = r.DateTime
+                })
             };
 
     }

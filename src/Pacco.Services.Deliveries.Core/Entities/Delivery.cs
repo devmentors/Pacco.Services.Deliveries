@@ -45,6 +45,10 @@ namespace Pacco.Services.Deliveries.Core.Entities
 
         public void AddRegistration(DeliveryRegistration registration)
         {
+            if (Status != DeliveryStatus.InProgress)
+            {
+                throw new CannotAddDeliveryRegistrationException(Id, Status);
+            }
             if (!_registrations.Add(registration))
             {
                 return;

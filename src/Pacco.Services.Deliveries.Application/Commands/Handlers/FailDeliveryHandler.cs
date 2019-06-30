@@ -24,7 +24,7 @@ namespace Pacco.Services.Deliveries.Application.Commands.Handlers
                 throw new DeliveryNotFoundException(command.Id);
             }
             
-            delivery.Complete();
+            delivery.Fail();
 
             await _repository.UpdateAsync(delivery);
             await PublishEventsAsync(delivery);

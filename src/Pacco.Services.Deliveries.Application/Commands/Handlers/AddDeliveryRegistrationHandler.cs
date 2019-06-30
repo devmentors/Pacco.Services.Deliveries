@@ -24,7 +24,7 @@ namespace Pacco.Services.Deliveries.Application.Commands.Handlers
                 throw new DeliveryNotFoundException(command.Id);
             }
             
-            delivery.AddRegistration(new DeliveryRegistration(command.Message, command.DateTime));
+            delivery.AddRegistration(new DeliveryRegistration(command.Description, command.DateTime));
 
             if (delivery.HasChanged)
             {
