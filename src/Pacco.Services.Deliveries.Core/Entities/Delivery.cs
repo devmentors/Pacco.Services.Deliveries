@@ -63,12 +63,22 @@ namespace Pacco.Services.Deliveries.Core.Entities
                 throw new CannotChangeDeliveryStateException(Id, Status, DeliveryStatus.Completed);
             }
 
+            if (Status is DeliveryStatus.Completed)
+            {
+                throw new CannotChangeDeliveryStateException(Id, Status, DeliveryStatus.Completed);
+            }
+            
             Status = DeliveryStatus.Completed;
             AddEvent(new DeliveryStateChanged(this));
         }
         
         public void Fail()
         {
+            if (Status is DeliveryStatus.Failed)
+            {
+                throw new CannotChangeDeliveryStateException(Id, Status, DeliveryStatus.Failed);
+            }
+
             if (Status is DeliveryStatus.Completed)
             {
                 throw new CannotChangeDeliveryStateException(Id, Status, DeliveryStatus.Failed);
@@ -76,7 +86,6 @@ namespace Pacco.Services.Deliveries.Core.Entities
 
             Status = DeliveryStatus.Failed;
             AddEvent(new DeliveryStateChanged(this));
-
         }
     }
 }
