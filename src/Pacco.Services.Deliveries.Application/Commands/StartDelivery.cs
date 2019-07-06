@@ -13,7 +13,7 @@ namespace Pacco.Services.Deliveries.Application.Commands
 
         public StartDelivery(Guid id, Guid orderId, string description, DateTime dateTime)
         {
-            Id = id;
+            Id = id == Guid.Empty ? Guid.NewGuid() : id;
             OrderId = orderId;
             Description = description;
             DateTime = dateTime;

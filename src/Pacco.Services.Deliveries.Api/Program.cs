@@ -16,25 +16,26 @@ namespace Pacco.Services.Deliveries
 {
     public class Program
     {
-        public static async Task Main(string[] args) => await WebHost.CreateDefaultBuilder(args)
-            .ConfigureServices(services => services
-                .AddConvey()
-                .AddWebApi()
-                .AddApplication()
-                .AddInfrastructure()
-                .Build())
-            .Configure(app => app
-                .UseInfrastructure()
-                .UseDispatcherEndpoints(endpoints => endpoints
-                    .Get("", ctx => ctx.Response.WriteAsync("Welcome to Pacco Deliveries Service!"))
-                    .Get<GetDelivery, DeliveryDto>("deliveries/{orderId}")
-                    .Post<StartDelivery>("deliveries/{orderId}/start",
-                        afterDispatch: (cmd, ctx) => ctx.Response.Created($"deliveries/{cmd.OrderId}"))
-                    .Post<FailDelivery>("deliveries/{id}/fail")
-                    .Post<CompleteDelivery>("deliveries/{id}/complete")
-                    .Post<AddDeliveryRegistration>("deliveries/{id}/registrations")))
-            .UseLogging()
-            .Build()
-            .RunAsync();
+        public static async Task Main(string[] args)
+            => await WebHost.CreateDefaultBuilder(args)
+                .ConfigureServices(services => services
+                    .AddConvey()
+                    .AddWebApi()
+                    .AddApplication()
+                    .AddInfrastructure()
+                    .Build())
+                .Configure(app => app
+                    .UseInfrastructure()
+                    .UseDispatcherEndpoints(endpoints => endpoints
+                        .Get("", ctx => ctx.Response.WriteAsync("Welcome to Pacco Deliveries Service!"))
+                        .Get<GetDelivery, DeliveryDto>("deliveries/{orderId}")
+                        .Post<StartDelivery>("deliveries",
+                            afterDispatch: (cmd, ctx) => ctx.Response.Created($"deliveries/{cmd.OrderId}"))
+                        .Post<FailDelivery>("deliveries/{id}/fail")
+                        .Post<CompleteDelivery>("deliveries/{id}/complete")
+                        .Post<AddDeliveryRegistration>("deliveries/{id}/registrations")))
+                .UseLogging()
+                .Build()
+                .RunAsync();
     }
 }
