@@ -12,7 +12,7 @@ using Pacco.Services.Deliveries.Application.DTO;
 using Pacco.Services.Deliveries.Application.Queries;
 using Pacco.Services.Deliveries.Infrastructure;
 
-namespace Pacco.Services.Deliveries
+namespace Pacco.Services.Deliveries.Api
 {
     public class Program
     {
