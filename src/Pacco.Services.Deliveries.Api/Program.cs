@@ -6,6 +6,7 @@ using Convey.WebApi.CQRS;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Pacco.Services.Deliveries.Application;
 using Pacco.Services.Deliveries.Application.Commands;
 using Pacco.Services.Deliveries.Application.DTO;
@@ -19,6 +20,7 @@ namespace Pacco.Services.Deliveries.Api
         public static async Task Main(string[] args)
             => await WebHost.CreateDefaultBuilder(args)
                 .ConfigureServices(services => services
+                    .AddOpenTracing()
                     .AddConvey()
                     .AddWebApi()
                     .AddApplication()
