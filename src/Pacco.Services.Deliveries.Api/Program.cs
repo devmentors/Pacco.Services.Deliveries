@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Convey;
+using Convey.Configurations.Vault;
 using Convey.Logging;
+using Convey.Types;
 using Convey.WebApi;
 using Convey.WebApi.CQRS;
 using Microsoft.AspNetCore;
@@ -29,7 +31,7 @@ namespace Pacco.Services.Deliveries.Api
                 .Configure(app => app
                     .UseInfrastructure()
                     .UseDispatcherEndpoints(endpoints => endpoints
-                        .Get("", ctx => ctx.Response.WriteAsync("Welcome to Pacco Deliveries Service!"))
+                        .Get("", ctx => ctx.Response.WriteAsync(ctx.RequestServices.GetService<AppOptions>().Name))
                         .Get<GetDelivery, DeliveryDto>("deliveries/{orderId}")
                         .Post<StartDelivery>("deliveries",
                             afterDispatch: (cmd, ctx) => ctx.Response.Created($"deliveries/{cmd.OrderId}"))
@@ -37,6 +39,7 @@ namespace Pacco.Services.Deliveries.Api
                         .Post<CompleteDelivery>("deliveries/{id}/complete")
                         .Post<AddDeliveryRegistration>("deliveries/{id}/registrations")))
                 .UseLogging()
+                .UseVault()
                 .Build()
                 .RunAsync();
     }
