@@ -6,12 +6,12 @@ namespace Pacco.Services.Deliveries.Application.Commands
     [Contract]
     public class FailDelivery : ICommand
     {
-        public Guid Id { get; }
+        public Guid DeliveryId { get; }
         public string Reason { get; }
 
-        public FailDelivery(Guid id, string reason)
+        public FailDelivery(Guid deliveryId, string reason)
         {
-            Id = id;
+            DeliveryId = deliveryId;
             Reason = reason;
         }
     }

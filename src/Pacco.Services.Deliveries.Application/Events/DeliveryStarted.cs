@@ -6,12 +6,12 @@ namespace Pacco.Services.Deliveries.Application.Events
     [Contract]
     public class DeliveryStarted : IEvent
     {
-        public Guid Id { get; }
+        public Guid DeliveryId { get; }
         public Guid OrderId { get; }
 
-        public DeliveryStarted(Guid id, Guid orderId)
+        public DeliveryStarted(Guid deliveryId, Guid orderId)
         {
-            Id = id;
+            DeliveryId = deliveryId;
             OrderId = orderId;
         }
     }

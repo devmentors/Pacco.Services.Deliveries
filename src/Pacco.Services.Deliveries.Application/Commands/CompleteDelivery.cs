@@ -6,9 +6,9 @@ namespace Pacco.Services.Deliveries.Application.Commands
     [Contract]
     public class CompleteDelivery : ICommand
     {
-        public Guid Id { get; }
+        public Guid DeliveryId { get; }
 
-        public CompleteDelivery(Guid id)
-            => Id = id;
+        public CompleteDelivery(Guid deliveryId)
+            => DeliveryId = deliveryId;
     }
 }

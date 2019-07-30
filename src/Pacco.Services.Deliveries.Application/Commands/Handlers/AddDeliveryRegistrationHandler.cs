@@ -17,11 +17,11 @@ namespace Pacco.Services.Deliveries.Application.Commands.Handlers
 
         public override async Task HandleAsync(AddDeliveryRegistration command)
         {
-            var delivery = await  _repository.GetAsync(command.Id);
+            var delivery = await  _repository.GetAsync(command.DeliveryId);
 
             if (delivery is null)
             {
-                throw new DeliveryNotFoundException(command.Id);
+                throw new DeliveryNotFoundException(command.DeliveryId);
             }
             
             delivery.AddRegistration(new DeliveryRegistration(command.Description, command.DateTime));

@@ -6,13 +6,13 @@ namespace Pacco.Services.Deliveries.Application.Commands
     [Contract]
     public class AddDeliveryRegistration : ICommand
     {
-        public Guid Id { get; }
+        public Guid DeliveryId { get; }
         public string Description { get; }
         public DateTime DateTime { get; }
 
-        public AddDeliveryRegistration(Guid id, string description, DateTime dateTime)
+        public AddDeliveryRegistration(Guid deliveryId, string description, DateTime dateTime)
         {
-            Id = id;
+            DeliveryId = deliveryId;
             Description = description;
             DateTime = dateTime;
         }

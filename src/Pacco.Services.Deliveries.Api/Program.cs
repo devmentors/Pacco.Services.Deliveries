@@ -35,9 +35,9 @@ namespace Pacco.Services.Deliveries.Api
                         .Get<GetDelivery, DeliveryDto>("deliveries/{orderId}")
                         .Post<StartDelivery>("deliveries",
                             afterDispatch: (cmd, ctx) => ctx.Response.Created($"deliveries/{cmd.OrderId}"))
-                        .Post<FailDelivery>("deliveries/{id}/fail")
-                        .Post<CompleteDelivery>("deliveries/{id}/complete")
-                        .Post<AddDeliveryRegistration>("deliveries/{id}/registrations")))
+                        .Post<FailDelivery>("deliveries/{deliveryId}/fail")
+                        .Post<CompleteDelivery>("deliveries/{deliveryId}/complete")
+                        .Post<AddDeliveryRegistration>("deliveries/{deliveryId}/registrations")))
                 .UseLogging()
                 .UseVault()
                 .Build()

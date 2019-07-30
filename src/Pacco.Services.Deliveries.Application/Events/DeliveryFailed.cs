@@ -6,12 +6,12 @@ namespace Pacco.Services.Deliveries.Application.Events
     [Contract]
     public class DeliveryFailed : IEvent
     {
-        public Guid Id { get; }
+        public Guid DeliveryId { get; }
         public Guid OrderId { get; }
 
-        public DeliveryFailed(Guid id, Guid orderId)
+        public DeliveryFailed(Guid deliveryId, Guid orderId)
         {
-            Id = id;
+            DeliveryId = deliveryId;
             OrderId = orderId;
         }
     }
