@@ -18,6 +18,7 @@ using Pacco.Services.Deliveries.Application;
 using Pacco.Services.Deliveries.Application.Commands;
 using Pacco.Services.Deliveries.Application.Services;
 using Pacco.Services.Deliveries.Core.Repositories;
+using Pacco.Services.Deliveries.Infrastructure.Contexts;
 using Pacco.Services.Deliveries.Infrastructure.Exceptions;
 using Pacco.Services.Deliveries.Infrastructure.Mongo.Documents;
 using Pacco.Services.Deliveries.Infrastructure.Mongo.Repositories;
@@ -33,6 +34,8 @@ namespace Pacco.Services.Deliveries.Infrastructure
             builder.Services.AddTransient<IMessageBroker, MessageBroker>();
             builder.Services.AddTransient<IDeliveriesRepository, DeliveriesMongoRepository>();
             builder.Services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+            builder.Services.AddTransient<IAppContextFactory, AppContextFactory>();
+            builder.Services.AddTransient(ctx => ctx.GetRequiredService<IAppContextFactory>().Create());
 
             return builder
                 .AddQueryHandlers()
