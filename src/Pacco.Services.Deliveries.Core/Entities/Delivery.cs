@@ -10,8 +10,8 @@ namespace Pacco.Services.Deliveries.Core.Entities
     public class Delivery : AggregateRoot
     {
         public Guid OrderId { get; protected set; }
-        
         public DeliveryStatus Status { get; protected set; }
+        public string Notes { get; protected set; }
 
         public IEnumerable<DeliveryRegistration> Registrations
         {
@@ -26,7 +26,8 @@ namespace Pacco.Services.Deliveries.Core.Entities
 
         private ISet<DeliveryRegistration> _registrations = new HashSet<DeliveryRegistration>();
 
-        public Delivery(AggregateId id, Guid orderId, DeliveryStatus status, IEnumerable<DeliveryRegistration> registrations = null)
+        public Delivery(AggregateId id, Guid orderId, DeliveryStatus status,
+            IEnumerable<DeliveryRegistration> registrations = null)
         {
             Id = id;
             OrderId = orderId;
@@ -48,11 +49,12 @@ namespace Pacco.Services.Deliveries.Core.Entities
             {
                 throw new CannotAddDeliveryRegistrationException(Id, Status);
             }
+
             if (!_registrations.Add(registration))
             {
                 return;
             }
-            
+
             AddEvent(new DeliveryRegistrationAdded(this, registration));
         }
 
@@ -67,12 +69,12 @@ namespace Pacco.Services.Deliveries.Core.Entities
             {
                 throw new CannotChangeDeliveryStateException(Id, Status, DeliveryStatus.Completed);
             }
-            
+
             Status = DeliveryStatus.Completed;
             AddEvent(new DeliveryStateChanged(this));
         }
-        
-        public void Fail()
+
+        public void Fail(string reason)
         {
             if (Status is DeliveryStatus.Failed)
             {
@@ -85,6 +87,7 @@ namespace Pacco.Services.Deliveries.Core.Entities
             }
 
             Status = DeliveryStatus.Failed;
+            Notes = reason;
             AddEvent(new DeliveryStateChanged(this));
         }
     }

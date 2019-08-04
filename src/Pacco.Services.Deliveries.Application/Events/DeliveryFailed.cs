@@ -8,11 +8,13 @@ namespace Pacco.Services.Deliveries.Application.Events
     {
         public Guid DeliveryId { get; }
         public Guid OrderId { get; }
+        public string Reason { get; }
 
-        public DeliveryFailed(Guid deliveryId, Guid orderId)
+        public DeliveryFailed(Guid deliveryId, Guid orderId, string reason)
         {
             DeliveryId = deliveryId;
             OrderId = orderId;
+            Reason = reason;
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Pacco.Services.Deliveries.Application.DTO
         public Guid Id { get; set; }
         public Guid OrderId { get; set; }
         public DeliveryStatus Status { get; set; }
+        public string Notes { get; set; }
         
         public DateTime? LastUpdate => Registrations
             .OrderByDescending(r => r.DateTime)
@@ -18,11 +19,4 @@ namespace Pacco.Services.Deliveries.Application.DTO
         
         public IEnumerable<DeliveryRegistrationDto> Registrations { get; set; }
     }
-
-    public class DeliveryRegistrationDto
-    {
-        public string Description { get; set; }
-        public DateTime DateTime { get; set; }
-    }
-    
 }

@@ -25,7 +25,7 @@ namespace Pacco.Services.Deliveries.Infrastructure.Services
                         case DeliveryStatus.Completed:
                             return new DeliveryCompleted(e.Delivery.Id, e.Delivery.OrderId);
                         case DeliveryStatus.Failed:
-                            return new DeliveryFailed(e.Delivery.Id, e.Delivery.OrderId);
+                            return new DeliveryFailed(e.Delivery.Id, e.Delivery.OrderId, e.Delivery.Notes);
                     }
                     break;
                 case DeliveryRegistrationAdded e:
