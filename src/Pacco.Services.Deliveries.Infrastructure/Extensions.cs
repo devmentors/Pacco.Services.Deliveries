@@ -23,6 +23,7 @@ using Pacco.Services.Deliveries.Application.Services;
 using Pacco.Services.Deliveries.Core.Repositories;
 using Pacco.Services.Deliveries.Infrastructure.Contexts;
 using Pacco.Services.Deliveries.Infrastructure.Exceptions;
+using Pacco.Services.Deliveries.Infrastructure.Logging;
 using Pacco.Services.Deliveries.Infrastructure.Mongo.Documents;
 using Pacco.Services.Deliveries.Infrastructure.Mongo.Repositories;
 using Pacco.Services.Deliveries.Infrastructure.Services;
@@ -51,6 +52,7 @@ namespace Pacco.Services.Deliveries.Infrastructure
                 .AddMongo()
                 .AddMetrics()
                 .AddJaeger()
+                .AddHandlersLogging()
                 .AddMongoRepository<DeliveryDocument, Guid>("Deliveries");
         }
 
