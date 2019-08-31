@@ -10,14 +10,12 @@ namespace Pacco.Services.Deliveries.Application.Commands.Handlers
     internal sealed class AddDeliveryRegistrationHandler : CommandHandlerBase<AddDeliveryRegistration>
     {
         private readonly IDeliveriesRepository _repository;
-        private readonly ILogger<AddDeliveryRegistrationHandler> _logger;
 
         public AddDeliveryRegistrationHandler(IDeliveriesRepository repository, IMessageBroker messageBroker,
-            IEventMapper eventMapper, ILogger<AddDeliveryRegistrationHandler> logger) 
+            IEventMapper eventMapper) 
             : base(messageBroker, eventMapper)
         {
             _repository = repository;
-            _logger = logger;
         }
 
         public override async Task HandleAsync(AddDeliveryRegistration command)
@@ -33,7 +31,6 @@ namespace Pacco.Services.Deliveries.Application.Commands.Handlers
             {
                 await _repository.UpdateAsync(delivery);
                 await PublishEventsAsync(delivery);
-                _logger.LogInformation($"Added a registration for the delivery with id: {command.DeliveryId}.");
             }
         }
     }
