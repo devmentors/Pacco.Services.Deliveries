@@ -12,7 +12,8 @@ namespace Pacco.Services.Deliveries.Infrastructure.Contexts
         {
         }
 
-        internal AppContext(CorrelationContext context) : this(context.CorrelationId, new IdentityContext(context.User))
+        internal AppContext(CorrelationContext context) : this(context.CorrelationId,
+            context.User is null ? IdentityContext.Empty : new IdentityContext(context.User))
         {
         }
 
@@ -21,7 +22,7 @@ namespace Pacco.Services.Deliveries.Infrastructure.Contexts
             RequestId = requestId;
             Identity = identity;
         }
-        
+
         internal static IAppContext Empty => new AppContext();
     }
 }
