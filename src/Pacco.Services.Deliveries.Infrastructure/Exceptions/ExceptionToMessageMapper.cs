@@ -25,8 +25,14 @@ namespace Pacco.Services.Deliveries.Infrastructure.Exceptions
                     FailDelivery command => new FailDeliveryRejected(command.DeliveryId, ex.Message, ex.Code),
                     _ => null
                 },
+                DeliveryAlreadyStartedException  ex => message switch
+                {
+                    StartDelivery command => new StartDeliveryRejected(command.DeliveryId, command.OrderId, ex.Message, ex.Code),
+                    _ => null,
+                },
                 DeliveryNotFoundException ex => message switch
                 {
+                    AddDeliveryRegistration command => new AddDeliveryRegistrationRejected(command.DeliveryId, ex.Message, ex.Code),
                     CompleteDelivery command => (IRejectedEvent) new CompleteDeliveryRejected(command.DeliveryId, ex.Message, ex.Code),
                     FailDelivery command => new FailDeliveryRejected(command.DeliveryId, ex.Message, ex.Code),
                     _ => null

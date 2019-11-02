@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Convey.CQRS.Commands;
+using Pacco.Services.Deliveries.Application.Exceptions;
 using Pacco.Services.Deliveries.Application.Services;
 using Pacco.Services.Deliveries.Core.Entities;
 using Pacco.Services.Deliveries.Core.Repositories;
@@ -24,7 +25,13 @@ namespace Pacco.Services.Deliveries.Application.Commands.Handlers
 
         public async Task HandleAsync(StartDelivery command)
         {
-            var delivery = Delivery.Create(command.DeliveryId, command.OrderId, DeliveryStatus.InProgress);
+            var delivery = await _repository.GetForOrderAsync(command.OrderId);
+            if (!(delivery is null) && delivery.Status != DeliveryStatus.Failed)
+            {
+                throw new DeliveryAlreadyStartedException(command.OrderId);
+            }
+
+            delivery = Delivery.Create(command.DeliveryId, command.OrderId, DeliveryStatus.InProgress);
             delivery.AddRegistration(new DeliveryRegistration(command.Description, command.DateTime));
             await _repository.AddAsync(delivery);
             var events = _eventMapper.MapAll(delivery.Events);

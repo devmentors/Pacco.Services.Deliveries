@@ -8,7 +8,7 @@ namespace Pacco.Services.Deliveries.Application.Commands
     {
         public Guid DeliveryId { get; }
         public Guid OrderId { get; }
-        public string Description { get; set; }
+        public string Description { get; }
         public DateTime DateTime { get; }
 
         public StartDelivery(Guid deliveryId, Guid orderId, string description, DateTime dateTime)

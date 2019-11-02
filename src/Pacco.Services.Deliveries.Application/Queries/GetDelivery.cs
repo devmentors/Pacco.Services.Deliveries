@@ -6,6 +6,6 @@ namespace Pacco.Services.Deliveries.Application.Queries
 {
     public class GetDelivery : IQuery<DeliveryDto>
     { 
-        public Guid OrderId { get; set; }
+        public Guid DeliveryId { get; set; }
     }
 }

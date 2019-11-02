@@ -32,9 +32,9 @@ namespace Pacco.Services.Deliveries.Api
                     .UseInfrastructure()
                     .UseDispatcherEndpoints(endpoints => endpoints
                         .Get("", ctx => ctx.Response.WriteAsync(ctx.RequestServices.GetService<AppOptions>().Name))
-                        .Get<GetDelivery, DeliveryDto>("deliveries/{orderId}")
+                        .Get<GetDelivery, DeliveryDto>("deliveries/{deliveryId}")
                         .Post<StartDelivery>("deliveries",
-                            afterDispatch: (cmd, ctx) => ctx.Response.Created($"deliveries/{cmd.OrderId}"))
+                            afterDispatch: (cmd, ctx) => ctx.Response.Created($"deliveries/{cmd.DeliveryId}"))
                         .Post<FailDelivery>("deliveries/{deliveryId}/fail")
                         .Post<CompleteDelivery>("deliveries/{deliveryId}/complete")
                         .Post<AddDeliveryRegistration>("deliveries/{deliveryId}/registrations")))

@@ -3,7 +3,7 @@
 @orderId = 00000000-0000-0000-0000-000000000000
 
 ###
-GET {{url}}/deliveries/{{orderId}}
+GET {{url}}/deliveries/{{deliveryId}}
 
 ###
 POST {{url}}/deliveries

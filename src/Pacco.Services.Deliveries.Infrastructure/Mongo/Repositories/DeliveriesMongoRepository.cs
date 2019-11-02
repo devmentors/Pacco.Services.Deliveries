@@ -20,6 +20,12 @@ namespace Pacco.Services.Deliveries.Infrastructure.Mongo.Repositories
             return document?.AsEntity();
         }
 
+        public async Task<Delivery> GetForOrderAsync(Guid id)
+        {
+            var document = await _repository.GetAsync(d => d.OrderId == id);
+            return document?.AsEntity();
+        }
+
         public Task AddAsync(Delivery delivery)
             => _repository.AddAsync(delivery.AsDocument());
         
