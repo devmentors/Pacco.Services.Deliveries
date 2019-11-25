@@ -4,7 +4,6 @@ using Convey.CQRS.Queries;
 using Convey.Persistence.MongoDB;
 using Pacco.Services.Deliveries.Application.DTO;
 using Pacco.Services.Deliveries.Application.Queries;
-using Pacco.Services.Deliveries.Core.Entities;
 using Pacco.Services.Deliveries.Infrastructure.Mongo.Documents;
 
 namespace Pacco.Services.Deliveries.Infrastructure.Mongo.Queries.Handlers
