@@ -68,7 +68,7 @@ namespace Pacco.Services.Deliveries.Infrastructure
                 .AddMetrics()
                 .AddJaeger()
                 .AddHandlersLogging()
-                .AddMongoRepository<DeliveryDocument, Guid>("Deliveries")
+                .AddMongoRepository<DeliveryDocument, Guid>("deliveries")
                 .AddWebApiSwaggerDocs();
         }
 
