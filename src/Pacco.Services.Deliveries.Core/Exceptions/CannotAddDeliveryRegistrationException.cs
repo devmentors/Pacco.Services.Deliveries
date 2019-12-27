@@ -3,7 +3,7 @@ using Pacco.Services.Deliveries.Core.Entities;
 
 namespace Pacco.Services.Deliveries.Core.Exceptions
 {
-    public class CannotAddDeliveryRegistrationException : ExceptionBase
+    public class CannotAddDeliveryRegistrationException : DomainException
     {
         public override string Code => "cannot_add_delivery_registration";
 

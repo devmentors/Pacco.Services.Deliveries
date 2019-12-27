@@ -3,7 +3,7 @@ using Pacco.Services.Deliveries.Core.Entities;
 
 namespace Pacco.Services.Deliveries.Core.Exceptions
 {
-    public class CannotChangeDeliveryStateException : ExceptionBase
+    public class CannotChangeDeliveryStateException : DomainException
     {
         public override string Code => "cannot_change_delivery_state";
 

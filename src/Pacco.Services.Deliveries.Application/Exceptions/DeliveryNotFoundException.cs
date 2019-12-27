@@ -1,9 +1,8 @@
 using System;
-using Pacco.Services.Deliveries.Core.Exceptions;
 
 namespace Pacco.Services.Deliveries.Application.Exceptions
 {
-    public class DeliveryNotFoundException : ExceptionBase
+    public class DeliveryNotFoundException : AppException
     {
         public override string Code => "delivery_not_found";
 

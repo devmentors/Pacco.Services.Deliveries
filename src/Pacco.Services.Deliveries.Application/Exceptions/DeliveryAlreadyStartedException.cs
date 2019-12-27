@@ -1,9 +1,8 @@
 using System;
-using Pacco.Services.Deliveries.Core.Exceptions;
 
 namespace Pacco.Services.Deliveries.Application.Exceptions
 {
-    public class DeliveryAlreadyStartedException : ExceptionBase
+    public class DeliveryAlreadyStartedException : AppException
     {
         public override string Code => "delivery_already_started";
         
