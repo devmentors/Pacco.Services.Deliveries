@@ -1,5 +1,4 @@
 using System;
-using Convey.CQRS.Events;
 using Convey.MessageBrokers.RabbitMQ;
 using Pacco.Services.Deliveries.Application.Commands;
 using Pacco.Services.Deliveries.Application.Events.Rejected;
@@ -20,7 +19,7 @@ namespace Pacco.Services.Deliveries.Infrastructure.Exceptions
                 },
                 CannotChangeDeliveryStateException ex => message switch
                 {
-                    StartDelivery command => (IRejectedEvent) new StartDeliveryRejected(command.DeliveryId, command.OrderId, ex.Message, ex.Code),
+                    StartDelivery command => new StartDeliveryRejected(command.DeliveryId, command.OrderId, ex.Message, ex.Code),
                     CompleteDelivery command => new CompleteDeliveryRejected(command.DeliveryId, ex.Message, ex.Code),
                     FailDelivery command => new FailDeliveryRejected(command.DeliveryId, ex.Message, ex.Code),
                     _ => null
@@ -33,7 +32,7 @@ namespace Pacco.Services.Deliveries.Infrastructure.Exceptions
                 DeliveryNotFoundException ex => message switch
                 {
                     AddDeliveryRegistration command => new AddDeliveryRegistrationRejected(command.DeliveryId, ex.Message, ex.Code),
-                    CompleteDelivery command => (IRejectedEvent) new CompleteDeliveryRejected(command.DeliveryId, ex.Message, ex.Code),
+                    CompleteDelivery command => new CompleteDeliveryRejected(command.DeliveryId, ex.Message, ex.Code),
                     FailDelivery command => new FailDeliveryRejected(command.DeliveryId, ex.Message, ex.Code),
                     _ => null
                 },

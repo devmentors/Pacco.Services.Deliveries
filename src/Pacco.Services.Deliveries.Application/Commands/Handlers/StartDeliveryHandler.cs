@@ -26,7 +26,7 @@ namespace Pacco.Services.Deliveries.Application.Commands.Handlers
         public async Task HandleAsync(StartDelivery command)
         {
             var delivery = await _repository.GetForOrderAsync(command.OrderId);
-            if (!(delivery is null) && delivery.Status != DeliveryStatus.Failed)
+            if (delivery is {} && delivery.Status != DeliveryStatus.Failed)
             {
                 throw new DeliveryAlreadyStartedException(command.OrderId);
             }
